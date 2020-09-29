@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "games-app"
+    }
+  },
+  "defaultProject": "games-app",
+  "cli": {
+    "analytics": "652f2a64-4206-4b16-86da-915e99b027d2"
+  }
 }

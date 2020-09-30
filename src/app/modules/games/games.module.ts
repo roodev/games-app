@@ -7,10 +7,11 @@ import { FlexLayoutModule } from "@angular/flex-layout"
 import { GamesRoutingModule } from './games-routing.module';
 import { GamesComponent } from './games.component';
 import { GameCardComponent } from './game-card/game-card.component';
+import { GameDetailComponent } from './game-detail/game-detail.component';
 
 
 @NgModule({
-  declarations: [GamesComponent, GameCardComponent],
+  declarations: [GamesComponent, GameCardComponent, GameDetailComponent],
   imports: [
     CommonModule,
     GamesRoutingModule,

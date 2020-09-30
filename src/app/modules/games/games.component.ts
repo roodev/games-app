@@ -26,10 +26,8 @@ export class GamesComponent implements OnInit, OnDestroy {
   }
 
   findAllGames(): void{
-    this.httpRequest= this.gamesService.findAllGames().subscribe(response =>{
-      console.log(this.Games)
-      this.Games= response.body['data']
-      console.log(this.Games)
+    this.httpRequest= this.gamesService.findAllGames().subscribe(response =>{      
+      this.Games= response.body['data']      
     }, err => {
       console.log(err)
     })

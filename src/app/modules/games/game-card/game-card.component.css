@@ -1,0 +1,11 @@
+.director-image{
+    background-size: cover;
+}
+
+.gameCapa-image{
+    height: 400px;
+}
+
+.content>mat-card{
+    width: 200px;
+}

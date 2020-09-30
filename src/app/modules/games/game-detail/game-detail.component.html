@@ -1,1 +1,38 @@
-<p>game-detail works!</p>
+<div class="content" fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start center"
+    fxLayoutAlign.gt-sm="center start" fxLayoutGap="16px">
+    <div fxFlex="50%" fxFlex.gt-sm="25%">
+        <mat-card class="mat-elevation-z0">
+            <img mat-card-image class="gameCover" [src]="Game.imagem" alt="Photo of a {{Game.nome}}">
+        </mat-card>
+        <mat-card class="mat-elevation-z3">
+            <mat-card-header>
+                <img mat-card-avatar class="developerImage" [src]="Game.developer.imagem" alt= "Photo of a {{Game.developer.nome}}">
+                <div class= "developerName">{{Game.developer.nome}}</div>
+            </mat-card-header>
+        </mat-card>
+    </div>
+    <div fxFlex="50%" fxFlex.gt-sm="75%">
+        <mat-card class="mat-elevation-z0">
+            <div class="row">
+                <span class="mat-display-1 uppercase-text">{{Game.nome}}</span>
+                <br>
+                <span class="gameInfo">{{Game.plataforma}}</span>
+            </div>
+
+<!--<div *ngIf="Game.developer || Game.sinopse" class="row">
+                <span>Desenvolvedora: {{Game.developer}}</span>
+                <span *ngIf="Game.developer" class="gameInfo"><b class="gameInfoBold">
+                    Desenvolvedora:</b> {{Game.developer}}</span>
+                &nbsp;
+                <span *ngIf="Game.sinopse" class="gameInfo"><b class="gameInfoBold">
+                    Sinopse:</b> {{Game.sinopse}}</span>
+            </div>       -->      
+
+            <div class="row">
+                <p class="gameSynopsis">{{Game.sinopse}}</p>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+

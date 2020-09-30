@@ -16,4 +16,8 @@ export class GamesService {
     return this.http.get<Game[]>(`${API_URL}/games/listarTodos`, { observe: 'response' })
   }
 
+  findGameByName(gameName: String): Observable<HttpResponse<Game>>{
+    return this.http.get<Game>(`${API_URL}/games/listarUm/${gameName}`, {observe: 'response' })
+  }
+
 }

@@ -1,0 +1,36 @@
+.content{
+    padding: 10px;
+}
+
+.gameCover{
+    height: 400px;
+    max-width: 400px;    
+}
+
+.developerImage{
+    background-size: cover;
+}
+
+.developerName{
+    font-size: 16px;
+    margin-top: 10px;
+    margin-left: -20px;
+}
+
+.uppercase-text{
+    text-transform: uppercase;
+}
+
+.gameInfo{
+    front-size: 14px;
+    color: rgb(120,120,120);
+}
+
+.gameInfoBold{
+    color: rgb(115,115,115);
+}
+
+.gameSynopsis{
+    text-align: justify;
+    text-justify: inter-word;
+}

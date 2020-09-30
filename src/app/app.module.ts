@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from "@angular/common/http"
 
 import{ToastrModule} from "ngx-toastr"
 
@@ -16,7 +17,8 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NavigationModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

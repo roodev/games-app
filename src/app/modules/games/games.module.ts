@@ -17,10 +17,11 @@ import { GamesComponent } from './games.component';
 import { GameCardComponent } from './game-card/game-card.component';
 import { GameDetailComponent } from './game-detail/game-detail.component';
 import { ComponentsModule } from"./../../components/components.module";
+import { NewGameComponent } from './new-game/new-game.component';
 
 
 @NgModule({
-  declarations: [GamesComponent, GameCardComponent, GameDetailComponent],
+  declarations: [GamesComponent, GameCardComponent, GameDetailComponent, NewGameComponent],
   imports: [
     CommonModule,
     GamesRoutingModule,

@@ -9,3 +9,11 @@
 .content>mat-card{
     width: 200px;
 }
+
+.routerLinkGame{
+    cursor: pointer;
+}
+
+.routerLinkGame:hover{
+    text-decoration: underline;
+}

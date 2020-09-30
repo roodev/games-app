@@ -1,7 +1,7 @@
-<div class ="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+<app-loading *ngIf="!Games"></app-loading>
+<div *ngIf ="Games" class ="content" fxLayout="row wrap" fxLayoutGap="16px grid">
   <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor= "let game of Games">
-    <app-game-card [Game]="game"></app-game-card>
-   
+    <app-game-card [Game]="game"></app-game-card>   
   </div>  
 </div>
 

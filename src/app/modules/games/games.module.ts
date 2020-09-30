@@ -8,6 +8,7 @@ import { GamesRoutingModule } from './games-routing.module';
 import { GamesComponent } from './games.component';
 import { GameCardComponent } from './game-card/game-card.component';
 import { GameDetailComponent } from './game-detail/game-detail.component';
+import { ComponentsModule } from"./../../components/components.module";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { GameDetailComponent } from './game-detail/game-detail.component';
     CommonModule,
     GamesRoutingModule,
     MatCardModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ComponentsModule
   ]
 })
 export class GamesModule { }

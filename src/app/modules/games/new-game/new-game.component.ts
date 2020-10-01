@@ -59,8 +59,9 @@ export class NewGameComponent implements OnInit, OnDestroy {
   initializeNewDeveloperFormGroup(): void{
     this.developerFormGroup= this.builder.group({
       nome: this.builder.control(null, [Validators.required]),
-      imagem: this.builder.control(null),
-      biografia: this.builder.control(null)
+      imagem: this.builder.control(null, [Validators.required]),
+      nacionalidade: this.builder.control(null, [Validators.required]),
+      plataforma: this.builder.control(null,[Validators.required])
     })    
   }
 
@@ -71,8 +72,7 @@ export class NewGameComponent implements OnInit, OnDestroy {
       sinopse: this.builder.control(null, [Validators.required]),
       imagem: this.builder.control(null, [Validators.required]),
       classificacao: this.builder.control(null),
-      developer: this.builder.control(null),
-      
+      developer: this.builder.control(null, [Validators.required])           
     })
   }
 
@@ -89,14 +89,14 @@ export class NewGameComponent implements OnInit, OnDestroy {
 
   nextStep(): void{
     if(this.isNewDeveloper){
-      this.creatNewDeveloper(this.developerFormGroup.value)
+      this.createNewDeveloper(this.developerFormGroup.value)
     }else{
       this.gameFormGroup.controls['developer'].setValue(this.developerFormGroup.value['developer']['_id'])
       this.stepDeveloperLabel=`Developer: ${this.developerFormGroup.value['developer']['nome']}`
     }
   }
 
-    creatNewDeveloper(formValueDeveloper: Developer): void{
+    createNewDeveloper(formValueDeveloper: Developer): void{
       this.httpRequest= this.developersService.createNewDeveloper(formValueDeveloper).subscribe(response =>{
         this.gameFormGroup.controls['developer'].setValue(response.body['data']['_id'])
         this.stepDeveloperLabel= `Developer: ${response.body['data']['nome']}`
@@ -106,9 +106,9 @@ export class NewGameComponent implements OnInit, OnDestroy {
       })
     }
 
-    creatNewGame(): void{
+    createNewGame(): void{
       this.httpRequest= this.gamesService.createNewGame(this.gameFormGroup.value).subscribe(response => {
-        this.toast.showToastrSuccess(`O game ${response.body['data']['nome']} foi adicionado com sucesso`)
+        this.toastr.showToastrSuccess(`O game ${response.body['data']['nome']} foi adicionado com sucesso`)
       }, err=>{
         this.toastr.showToastrError(`${err.error['message']}`)
       })      

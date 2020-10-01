@@ -6,7 +6,7 @@
             <mat-form-field class="form-element">
                 <mat-label>Selecione uma Desenvolvedora</mat-label>
                 <mat-select formControlName="developer" required>
-                    <mat-option *ngFor="let developer of desenvolvedoras" [value]="developer">{{developer.nome}}</mat-option>
+                    <mat-option *ngFor="let developer of developers" [value]="developer">{{developer.nome}}</mat-option>
                 </mat-select>
                 <mat-hint class="select-developer" (click)="newDeveloper()">Não encontrou a desenvolvedora desejada? Adicione uma agora</mat-hint>
             </mat-form-field>
@@ -21,11 +21,15 @@
             </mat-form-field>
             <mat-form-field class="form-element">
                 <mat-label>Imagem</mat-label>
-                <input matInput formControlName="imagem" placeholder="Link da imagem">
+                <input matInput formControlName="imagem" placeholder="Link da imagem" required>
             </mat-form-field>
             <mat-form-field class="form-element">
-                <mat-label>Biografia</mat-label>
-                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" formControlName="biografia" placeholder="Biografia"></textarea>
+                <mat-label>Nacionalidade</mat-label>
+                <input matInput formControlName="nacionalidade" placeholder="Nacionalidade" required>
+            </mat-form-field>
+            <mat-form-field class="form-element">
+                <mat-label>Plataforma</mat-label>
+                <input matInput formControlName="plataforma" placeholder="Plataforma" required>
             </mat-form-field>
         </form>
         <div class="form-element">
@@ -35,33 +39,32 @@
     <mat-step [stepControl]="gameFormGroup" editable="false">
         <form [formGroup]="gameFormGroup" class="form">
             <ng-template matStepLabel>Game</ng-template>
-            <mat-form-fiel class="form-element">
+            <mat-form-field class="form-element">
                 <mat-label>Nome</mat-label>
-                <input matInput formControlName='nome' palceholder="nome" required>
-            </mat-form-fiel>
+                <input matInput formControlName='nome' palceholder="Nome" required>
+            </mat-form-field>
             <mat-form-field class="form-element">
                 <mat-label>Plataforma</mat-label>
                 <input matInput formControlName="plataforma" placeholder="Plataforma" required>
             </mat-form-field>
             <mat-form-field class="form-element">
                 <mat-label>Sinopse</mat-label>
-                <textarea matInput formControlName="sinopse" placeholder="Sinopse" required>
+                <textarea matInput formControlName="sinopse" placeholder="Sinopse" required></textarea>
             </mat-form-field>
             <mat-form-field class="form-element">
                 <mat-label>Imagem</mat-label>
                 <input matInput formControlName="imagem" placeholder="Imagem" required>
             </mat-form-field>
-            <mat-form-field class="form-element">
+            <mat-form-field class="form-element">                
                 <mat-label>Classificação Indicativa</mat-label>
                 <input matInput formControlName="classificacao" placeholder="Classificação">
             </mat-form-field>  
             <div class="form-element">
-                <button class="button" color="primary" mat-button [mat-dialog-close] ="true"
-                [desabled]= "gameFormGroup.invalid" (click)= "createNewGame()">Adicionar Game</button>
+                <button class="button" color="primary" mat-button [mat-dialog-close]="true" [disabled]="gameFormGroup.invalid" (click)= "createNewGame()">Adicionar Game</button>
             </div>          
         </form>
     </mat-step>
 </mat-horizontal-stepper>
 <div class="form-element">
-    <button mat-button class="button" color="warn" [mat-dialog]="false">Fechar</button>
+    <button mat-button class="button" color="warn" [mat-dialog-close]="false">Fechar</button>
 </div>

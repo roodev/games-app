@@ -37,3 +37,4 @@ export class GameDetailComponent implements OnInit, OnDestroy {
   }
 
 }
+  

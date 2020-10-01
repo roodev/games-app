@@ -46,6 +46,13 @@ export class GamesComponent implements OnInit, OnDestroy {
       disableClose: true
     })
 
+    dialogRef.afterClosed().subscribe(newGameAdded =>{
+      if(newGameAdded){
+        this.Games= undefined
+        this.findAllGames()
+      }
+    })
+
   }
 
 }

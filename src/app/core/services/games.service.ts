@@ -10,7 +10,8 @@ import { API_URL } from "./../api"
 })
 export class GamesService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient) { }
 
   findAllGames(): Observable<HttpResponse<Game[]>>{
     return this.http.get<Game[]>(`${API_URL}/games/listarTodos`, { observe: 'response' })

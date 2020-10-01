@@ -5,6 +5,7 @@ import { Subscription } from "rxjs"
 import { Developer } from "./../../../core/models/developer.model"
 import { DevelopersService } from "./../../../core/services/developers.service"
 import { MyToastrService } from "./../../../core/services/toastr.service"
+import { GamesService } from "./../../../core/services/games.service"
 
 @Component({
   selector: 'app-new-game',
@@ -19,18 +20,21 @@ export class NewGameComponent implements OnInit, OnDestroy {
   isNewDeveloper: boolean= false
   developers: Developer[]
   stepDeveloperLabel: String='Developer'
+  gameFormGroup: FormGroup
 
   @ViewChild('autosize') autosize: CdkTextareaAutosize
 
   constructor(
     private developersService: DevelopersService,
     private builder: FormBuilder,
-    private toastr: MyToastrService
+    private toastr: MyToastrService,
+    private gamesService: GamesService
   ) { }
 
   ngOnInit(): void {
     this.findAllDevelopers()
     this.initializeSelectDeveloperFormGroup()
+    this.initializeGameFormGroup()
   }
 
   ngOnDestroy(): void{
@@ -60,6 +64,18 @@ export class NewGameComponent implements OnInit, OnDestroy {
     })    
   }
 
+  initializeGameFormGroup(): void{
+    this.gameFormGroup= this.builder.group({
+      nome: this.builder.control(null, [Validators.required]),
+      plataforma: this.builder.control(null, [Validators.required]),
+      sinopse: this.builder.control(null, [Validators.required]),
+      imagem: this.builder.control(null, [Validators.required]),
+      classificacao: this.builder.control(null),
+      developer: this.builder.control(null),
+      
+    })
+  }
+
   newDeveloper(): void{
     this.isNewDeveloper= !this.isNewDeveloper
     this.initializeNewDeveloperFormGroup()   
@@ -75,19 +91,27 @@ export class NewGameComponent implements OnInit, OnDestroy {
     if(this.isNewDeveloper){
       this.creatNewDeveloper(this.developerFormGroup.value)
     }else{
-      //definir o Id no formulário de fame
+      this.gameFormGroup.controls['developer'].setValue(this.developerFormGroup.value['developer']['_id'])
       this.stepDeveloperLabel=`Developer: ${this.developerFormGroup.value['developer']['nome']}`
     }
   }
 
     creatNewDeveloper(formValueDeveloper: Developer): void{
       this.httpRequest= this.developersService.createNewDeveloper(formValueDeveloper).subscribe(response =>{
-        //Definir o ID no formulário de filme
+        this.gameFormGroup.controls['developer'].setValue(response.body['data']['_id'])
         this.stepDeveloperLabel= `Developer: ${response.body['data']['nome']}`
         this.toastr.showToastrSuccess(`A desenvolvedora ${response.body['data']['nome']} foi adicionada com sucesso`)
       }, err=>{
         this.toastr.showToastrError(`${err.error['message']}`)
       })
+    }
+
+    creatNewGame(): void{
+      this.httpRequest= this.gamesService.createNewGame(this.gameFormGroup.value).subscribe(response => {
+        this.toast.showToastrSuccess(`O game ${response.body['data']['nome']} foi adicionado com sucesso`)
+      }, err=>{
+        this.toastr.showToastrError(`${err.error['message']}`)
+      })      
     }
 }
   

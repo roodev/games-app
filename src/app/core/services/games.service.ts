@@ -21,4 +21,8 @@ export class GamesService {
     return this.http.get<Game>(`${API_URL}/games/listarUm/${gameName}`, {observe: 'response' })
   }
 
+  createNewGame(body: Game): Observable<HttpResponse<Game>>{
+    return this.http.post<Game>(`${API_URL}/games/criar`, body, {observe: 'response'})
+  }
+
 }

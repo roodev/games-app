@@ -7,7 +7,7 @@
         </mat-card>
         <mat-card class="mat-elevation-z3">
             <mat-card-header>
-                <img mat-card-avatar class="developerImage" [src]="Game.developer.imagem" alt= "Photo of a {{Game.developer.nome}}">
+                <img mat-card-avatar class="developerImage" [src]="Game.developer.imagem" onError="this.src='./../../../../assets/developer.png.png'" alt= "Photo of a {{Game.developer.nome}}">
                 <div class= "developerName">{{Game.developer.nome}}</div>
             </mat-card-header>
         </mat-card>

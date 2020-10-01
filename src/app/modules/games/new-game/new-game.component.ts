@@ -1,11 +1,13 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from "@angular/forms"
 import { CdkTextareaAutosize } from "@angular/cdk/text-field"
+import { MatDialogRef } from "@angular/material/dialog"
 import { Subscription } from "rxjs"
 import { Developer } from "./../../../core/models/developer.model"
 import { DevelopersService } from "./../../../core/services/developers.service"
 import { MyToastrService } from "./../../../core/services/toastr.service"
 import { GamesService } from "./../../../core/services/games.service"
+
 
 @Component({
   selector: 'app-new-game',
@@ -28,7 +30,8 @@ export class NewGameComponent implements OnInit, OnDestroy {
     private developersService: DevelopersService,
     private builder: FormBuilder,
     private toastr: MyToastrService,
-    private gamesService: GamesService
+    private gamesService: GamesService,
+    private dialogRef: MatDialogRef<NewGameComponent>
   ) { }
 
   ngOnInit(): void {
@@ -109,9 +112,15 @@ export class NewGameComponent implements OnInit, OnDestroy {
     createNewGame(): void{
       this.httpRequest= this.gamesService.createNewGame(this.gameFormGroup.value).subscribe(response => {
         this.toastr.showToastrSuccess(`O game ${response.body['data']['nome']} foi adicionado com sucesso`)
+        this.dialogRef.close(true)
       }, err=>{
         this.toastr.showToastrError(`${err.error['message']}`)
+        this.dialogRef.close(false)
       })      
+    }
+
+    closeDialog(): void{
+      this.dialogRef.close(false)
     }
 }
   

@@ -68,11 +68,11 @@
                 <input matInput formControlName="classificacao" placeholder="Classificação">
             </mat-form-field>  
             <div class="form-element">
-                <button class="button" color="primary" mat-button [mat-dialog-close]="true" [disabled]="gameFormGroup.invalid" (click)= "createNewGame()">Adicionar Game</button>
+                <button class="button" color="primary" mat-button [disabled]="gameFormGroup.invalid" (click)= "createNewGame()">Adicionar Game</button>
             </div>          
         </form>
     </mat-step>
 </mat-horizontal-stepper>
 <div class="form-element">
-    <button mat-button class="button" color="warn" [mat-dialog-close]="false">Fechar</button>
+    <button mat-button class="button" color="warn"(click)="closeDialog()">Fechar</button>
 </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse }from "@angular/common/http"
+import { HttpClient,  HttpResponse, HttpParams }from "@angular/common/http"
 import { Observable } from "rxjs"
 import { Game } from "./../models/game.model"
 import { API_URL } from "./../api"
@@ -23,6 +23,13 @@ export class GamesService {
 
   createNewGame(body: Game): Observable<HttpResponse<Game>>{
     return this.http.post<Game>(`${API_URL}/games/criar`, body, {observe: 'response'})
+  }
+
+  validatorUniqueGameName(gameName: string){
+    let myParams = new HttpParams()
+    myParams = myParams.append('nome', gameName)
+    return this.http.get<any>(`${API_URL}/games/validarNomeGame`, {params: myParams}) 
+
   }
 
 }

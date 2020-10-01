@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from "@angular/common/http"
+import { HttpClient, HttpResponse, HttpParams } from "@angular/common/http"
 import { Observable } from "rxjs"
 import { Developer } from "./../models/developer.model"
 import { API_URL }  from "./../api"
@@ -20,5 +20,13 @@ export class DevelopersService {
   createNewDeveloper(body: Developer): Observable<HttpResponse<Developer>>{
     return this.http.post<Developer>(`${API_URL}/developers/criar`, body, {observe: 'response'})
   }
+
+  validatorUniqueDeveloperName(developerName: string){
+    let myParams= new HttpParams()
+    myParams= myParams.append('nome', developerName)
+    return this.http.get<any>(`${API_URL}/developers/validarNomeDeveloper`, {params: myParams})
+  }
+
+
 
 }

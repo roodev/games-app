@@ -7,6 +7,8 @@ import { Developer } from "./../../../core/models/developer.model"
 import { DevelopersService } from "./../../../core/services/developers.service"
 import { MyToastrService } from "./../../../core/services/toastr.service"
 import { GamesService } from "./../../../core/services/games.service"
+import { DeveloperValidator} from './../../../core/validators/developer.validator'
+import { GameValidator } from "./../../../core/validators/game.validator"
 
 
 @Component({
@@ -31,7 +33,9 @@ export class NewGameComponent implements OnInit, OnDestroy {
     private builder: FormBuilder,
     private toastr: MyToastrService,
     private gamesService: GamesService,
-    private dialogRef: MatDialogRef<NewGameComponent>
+    private dialogRef: MatDialogRef<NewGameComponent>,
+    private developerValidator: DeveloperValidator,
+    private gameValidator: GameValidator
   ) { }
 
   ngOnInit(): void {
@@ -61,7 +65,7 @@ export class NewGameComponent implements OnInit, OnDestroy {
 
   initializeNewDeveloperFormGroup(): void{
     this.developerFormGroup= this.builder.group({
-      nome: this.builder.control(null, [Validators.required]),
+      nome: this.builder.control(null, [Validators.required], this.developerValidator.validatorUniqueDeveloperName()),
       imagem: this.builder.control(null, [Validators.required]),
       nacionalidade: this.builder.control(null, [Validators.required]),
       plataforma: this.builder.control(null,[Validators.required])
@@ -70,7 +74,7 @@ export class NewGameComponent implements OnInit, OnDestroy {
 
   initializeGameFormGroup(): void{
     this.gameFormGroup= this.builder.group({
-      nome: this.builder.control(null, [Validators.required]),
+      nome: this.builder.control(null, [Validators.required], this.gameValidator.validatorUniqueGameName()),
       plataforma: this.builder.control(null, [Validators.required]),
       sinopse: this.builder.control(null, [Validators.required]),
       imagem: this.builder.control(null, [Validators.required]),
@@ -118,10 +122,21 @@ export class NewGameComponent implements OnInit, OnDestroy {
         this.dialogRef.close(false)
       })      
     }
-
+    
     closeDialog(): void{
       this.dialogRef.close(false)
     }
+
+    developerNameExists(): boolean{
+      return this.developerFormGroup.get('nome').hasError('developerNameAlreadyExists') 
+    }
+    
+    gameNameExists(): boolean{
+      return this.gameFormGroup.get('nome').hasError('gameNameAlreadyExists')
+
+    }
+
+    
 }
   
 

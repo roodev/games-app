@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 
-  title: string= 'Seleção de Games'
+  title: string= 'Seleção de Games e Desenvolvedoras'
   constructor() { }
 
   ngOnInit(): void {

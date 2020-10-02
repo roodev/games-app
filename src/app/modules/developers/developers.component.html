@@ -1,10 +1,12 @@
 <app-loading *ngIf="!Developers"></app-loading>
 <div *ngIf="Developers"class="content" fxLayout="row wrap" fxLayout="16px grid">
-  <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor= "let developer of Developers">
-    <app-developer-card [Developer]="developer"></app-developer-card>        
+    <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <button mat-flat-button color="primary" (click)="openNewDeveloperModal()">Adicionar desenvolvedora</button>        
     </div>
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor= "let game of Games">
+    <app-developer-card [Developer]="developer"></app-developer-card>   
+  </div>  
 </div>
-
 
         
             

@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { from, Subscription} from "rxjs"
+import { Subscription} from "rxjs"
 import { Developer } from "./../../core/models/developer.model"
 import { DevelopersService} from "./../../core/services/developers.service"
+import { MatDialog } from "@angular/material/dialog"
+import { NewDeveloperComponent } from "./new-developer/new-developer.component"
 
 
 @Component({
@@ -15,7 +17,8 @@ export class DevelopersComponent implements OnInit, OnDestroy {
   Developers: Developer[]
 
   constructor( 
-    private developersService: DevelopersService 
+    private developersService: DevelopersService ,
+    private dialog: MatDialog
   ){ }
 
   ngOnInit(): void {
@@ -31,6 +34,23 @@ export class DevelopersComponent implements OnInit, OnDestroy {
       this.Developers= response.body['data']      
     }, err=>{
       console.log(err)
+    })
+  }
+
+  openNewDeveloperModal(): void{
+    const dialogRef= this.dialog.open(NewDeveloperComponent, {
+      width: '600px',
+      height: '600px',
+      disableClose: true
+    })
+
+
+    dialogRef.afterClosed().subscribe(newDeveloperAdded => {
+      if(newDeveloperAdded){
+        this.Developers= undefined
+        this.findAllDevelopers()
+      }
+
     })
   }
 

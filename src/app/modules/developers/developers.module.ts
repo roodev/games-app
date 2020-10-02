@@ -15,14 +15,16 @@ import { DevelopersRoutingModule } from './developers-routing.module';
 import { DevelopersComponent } from './developers.component';
 import { DeveloperCardComponent } from './developer-card/developer-card.component';
 import { DeveloperDetailComponent } from './developer-detail/developer-detail.component';
-import { ComponentsModule} from "./../../components/components.module"
+import { ComponentsModule} from "./../../components/components.module";
+import { NewDeveloperComponent } from './new-developer/new-developer.component'
 
 
 @NgModule({
   declarations: [
     DevelopersComponent,
     DeveloperCardComponent,
-    DeveloperDetailComponent
+    DeveloperDetailComponent,
+    NewDeveloperComponent
   ],
   
   imports: [

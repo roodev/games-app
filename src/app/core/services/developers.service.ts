@@ -17,6 +17,10 @@ export class DevelopersService {
     return this.http.get<Developer[]>(`${API_URL}/developers/listarTodas`, {observe: 'response'})
   }
 
+  findDeveloperByName(developerName: String): Observable<HttpResponse<Developer>>{
+    return this.http.get<Developer>(`${API_URL}/developers/listarUma/${developerName}`, {observe: 'response' })
+  }
+
   createNewDeveloper(body: Developer): Observable<HttpResponse<Developer>>{
     return this.http.post<Developer>(`${API_URL}/developers/criar`, body, {observe: 'response'})
   }

@@ -8,6 +8,7 @@ import { DevelopersRoutingModule } from './developers-routing.module';
 import { DevelopersComponent } from './developers.component';
 import { DeveloperCardComponent } from './developer-card/developer-card.component';
 import { DeveloperDetailComponent } from './developer-detail/developer-detail.component';
+import { ComponentsModule} from "./../../components/components.module"
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { DeveloperDetailComponent } from './developer-detail/developer-detail.co
     CommonModule,
     DevelopersRoutingModule,
     MatCardModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ComponentsModule
   ]
 })
 export class DevelopersModule { }

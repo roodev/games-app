@@ -1,11 +1,9 @@
 .developer-image{
     background-size: cover;
-    height: 100px;
-    
-    
-     
+    height: 200px;
 }
 
-.content>mat-card{
-    width: 400px; 
-}
+.example-card {
+    max-width: 400px;
+    
+  }

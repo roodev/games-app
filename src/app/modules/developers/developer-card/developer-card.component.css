@@ -1,9 +1,17 @@
-.developer-image{
-    background-size: cover;
-    height: 200px;
+.exemple-card{
+    max-width: 1200px;    
+    height: 600px;
 }
 
-.example-card {
+.developerCapa-image{
+    height: 400px;
     max-width: 400px;
+}
+.routerLinkDeveloper {
+    cursor: pointer;
+}
+
+.routerLinkDeveloper:hover{
+    text-decoration: underline;   
     
   }

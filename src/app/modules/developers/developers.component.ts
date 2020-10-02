@@ -15,6 +15,7 @@ export class DevelopersComponent implements OnInit, OnDestroy {
 
   private httpRequest: Subscription
   Developers: Developer[]
+  hasError: boolean= false
 
   constructor( 
     private developersService: DevelopersService ,
@@ -33,7 +34,7 @@ export class DevelopersComponent implements OnInit, OnDestroy {
     this.httpRequest= this.developersService.findAllDevelopers().subscribe(response => {
       this.Developers= response.body['data']      
     }, err=>{
-      console.log(err)
+      this.hasError= true
     })
   }
 

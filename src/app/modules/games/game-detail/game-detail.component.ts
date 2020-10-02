@@ -31,7 +31,8 @@ export class GameDetailComponent implements OnInit, OnDestroy {
 
   findGameByName(gameName: String): void{
     this.httpRequest= this.gamesService.findGameByName(gameName).subscribe(response =>{
-     this.Game =response.body['data'] 
+     this.Game =response.body['data']
+     console.log(this.Game) 
     }, err =>{
       this.hasError= true
     })

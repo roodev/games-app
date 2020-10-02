@@ -1,11 +1,13 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from "@angular/forms"
-//import { CdkTextareaAutosize } from "@angular/cdk/text-field"
-import { throwToolbarMixedModesError } from '@angular/material/toolbar';
+import { CdkTextareaAutosize } from "@angular/cdk/text-field"
+import { MatDialogRef } from '@angular/material/dialog'
 import { Subscription } from "rxjs"
 import { Developer } from './../../../core/models/developer.model'
 import { DevelopersService } from './../../../core/services/developers.service'
 import { MyToastrService } from './../../../core/services/toastr.service'
+import { DeveloperValidator } from './../../../core/validators/developer.validator'
+
 
 @Component({
   selector: 'app-new-developer',
@@ -17,51 +19,43 @@ export class NewDeveloperComponent implements OnInit, OnDestroy {
   private httpRequest: Subscription
 
   developerFormGroup: FormGroup
-  isNewDeveloper: boolean= false
   developers: Developer[]
   stepDeveloperLabel: String= 'Developer'
 
-  //@ViewChild('autosize') autosize: CdkTextareaAutosize
+  @ViewChild('autosize') autosize: CdkTextareaAutosize
 
   constructor(
     private developersService: DevelopersService,
     private builder: FormBuilder,
-    private toastr: MyToastrService
+    private toastr: MyToastrService,
+    private developerValidator: DeveloperValidator,
+    private dialogRef: MatDialogRef<NewDeveloperComponent>
   ) { }
 
   ngOnInit(): void {
-    this.findAllDevelopers()
-    this.initializeSelectDeveloperFormGroup()
+    this.initializeNewDeveloperFormGroup()
   }
 
 
   ngOnDestroy(): void{
-    this.httpRequest.unsubscribe()
+    if (this.httpRequest){
+      this.httpRequest.unsubscribe()
+    }
   }
 
-  findAllDevelopers(): void{
-    this.httpRequest= this.developersService.findAllDevelopers().subscribe(response =>{
-      this.developers= response.body['data']
-    }, err=>{
-      console.log(err.error['message'])
-    })
-  }
-
-  createNewDeveloper(formValueDeveloper: Developer): void{
-    this.httpRequest= this.developersService.createNewDeveloper(formValueDeveloper).subscribe(response =>{
-      this.developerFormGroup.controls['developer'].setValue(response.body['data']['_id'])
+  
+  createNewDeveloper(): void{
+    this.httpRequest= this.developersService.createNewDeveloper(this.developerFormGroup.value).subscribe(response =>{
       this.stepDeveloperLabel= `Developer: ${response.body['data']['nome']}`
       this.toastr.showToastrSuccess(`A desenvolvedora ${response.body['data']['nome']} foi adicionada com sucesso`)
+      this.dialogRef.close(true)
     }, err=>{
       this.toastr.showToastrError(`${err.error['message']}`)
+      this.dialogRef.close(false)
     })
   }
 
-  initializeSelectDeveloperFormGroup(): void{
-    this.developerFormGroup= this.builder.group({
-      developer: this.builder.control(null, [Validators.required])
-    })
-
+  
 
   initializeNewDeveloperFormGroup(): void{
     this.developerFormGroup= this.builder.group({
@@ -72,25 +66,12 @@ export class NewDeveloperComponent implements OnInit, OnDestroy {
     })    
   }
 
-  newDeveloper(): void{
-    this.isNewDeveloper= !this.isNewDeveloper
-    this.initializeNewDeveloperFormGroup()   
-  }
+closeDialog(): void{
+  this.dialogRef.close(false)
 
-  selectDeveloper(): void{
-    this.isNewDeveloper= !this.isNewDeveloper
-    this.findAllDevelopers()
-    this.initializeSelectDeveloperFormGroup()    
-  }
+}
 
-  /*nextStep(): void{
-    if(this.isNewDeveloper){
-      this.createNewDeveloper(this.developerFormGroup.value)
-    }else{
-      this.developerFormGroup.controls['developer'].setValue(this.developerFormGroup.value['developer']['_id'])
-      this.stepDeveloperLabel=`Developer: ${this.developerFormGroup.value['developer']['nome']}`
-    }
-  }*/
-
-
+developerNameExists(): boolean{
+  return this.developerFormGroup.get('nome').hasError('developerNameAlreadyExists')
+}
 }

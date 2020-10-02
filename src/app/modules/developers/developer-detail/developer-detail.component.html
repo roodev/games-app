@@ -1,6 +1,6 @@
 <app-loading *ngIf="!Developer"></app-loading>
-<div *ngIf= "Developer" class="content" fxLayout="colum" fxLayout.gt-se="row" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="center start" fxLayoutGap="16px">
-    <div fxFlex="50%" fxFlex.gt-sm=25%>>
+<div *ngIf="Developer" class="content" fxLayout="column" fxLayout.gt-se="row" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="center start" fxLayoutGap="16px">
+    <div fxFlex="50%" fxFlex.gt-sm=25%>
         <mat-card class="mat-elevation-z0">
             <img mat-card-image class="developerCover" [src]="Developer.imagem" alt="Photo of a {{Developer.nome}}">
         </mat-card>

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core"
-import { AsyncValidatorFn, SelectMultipleControlValueAccessor } from "@angular/forms"
+import { AsyncValidatorFn } from "@angular/forms"
 import { map, debounceTime, distinctUntilChanged, switchMap, first } from "rxjs/operators"
 import { DevelopersService } from "./../services/developers.service"
 

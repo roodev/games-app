@@ -1,1 +1,30 @@
-<p>developers works!</p>
+<div *ngFor="let developer of Developers">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-tittle>{{developer.nome}}</mat-card-tittle>
+            <mat-card-subtitle>{{developer.plataforma}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="developer.imagem" alt="Photo of a{{developer.nome}}">
+        <mat-card-content>
+            <p>
+                {{developer.nacionalide}}
+            </p>
+        </mat-card-content>
+    </mat-card>
+</div>
+            
+            
+            
+
+
+            
+            
+            <!--</div>" class ="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+  <div fxFlex="100%" fxFlex.sm="100%" fxFlex.sm="100%">
+    <button mat-flat-button color="primary" (click)="openNewGameModal()">Adicionar Game</button>
+  </div>
+  <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor= "let game of Games">
+    <app-game-card [Game]="game"></app-game-card>   
+  </div>  
+</div>-->

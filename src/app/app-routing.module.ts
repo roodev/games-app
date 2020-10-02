@@ -6,15 +6,22 @@ const routes: Routes = [
         path:'home',
         loadChildren: () => import('./modules/welcome/welcome.module').then(module => module.WelcomeModule)
     },
+
     {
       path: 'games',
       loadChildren: () => import('./modules/games/games.module').then(module => module.GamesModule)
     },
+
+    {
+      path: 'developers',
+      loadChildren: () => import('./modules/developers/developers.module').then(module => module.DevelopersModule)
+    },
+
     {
       path:'',
       redirectTo: '/home',
       pathMatch: 'full'
-    }
+    },
     
 ];
 

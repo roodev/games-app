@@ -15,6 +15,7 @@ export class GamesComponent implements OnInit, OnDestroy {
 
   private httpRequest: Subscription
   Games: Game[]
+  hasError: boolean = false
   
 
   constructor(
@@ -35,7 +36,7 @@ export class GamesComponent implements OnInit, OnDestroy {
     this.httpRequest= this.gamesService.findAllGames().subscribe(response =>{      
       this.Games= response.body['data']      
     }, err => {
-      console.log(err)
+      this.hasError= true
     })
   }
 

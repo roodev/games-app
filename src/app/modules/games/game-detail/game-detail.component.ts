@@ -13,6 +13,7 @@ export class GameDetailComponent implements OnInit, OnDestroy {
 
   private httpRequest: Subscription
   Game: Game
+  hasError: boolean= false
 
   constructor(
     private ActivatedRoute: ActivatedRoute,
@@ -32,7 +33,7 @@ export class GameDetailComponent implements OnInit, OnDestroy {
     this.httpRequest= this.gamesService.findGameByName(gameName).subscribe(response =>{
      this.Game =response.body['data'] 
     }, err =>{
-      console.log(err)
+      this.hasError= true
     })
   }
 

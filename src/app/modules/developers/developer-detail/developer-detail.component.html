@@ -1,5 +1,5 @@
 <app-loading *ngIf="!Developer"></app-loading>
-<div *ngIf= "!Developer" class="content" fxLayout="colum" fxLayout.gt-se="row" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="center start" fxLayoutGap="16px">
+<div *ngIf= "Developer" class="content" fxLayout="colum" fxLayout.gt-se="row" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="center start" fxLayoutGap="16px">
     <div fxFlex="50%" fxFlex.gt-sm=25%>>
         <mat-card class="mat-elevation-z0">
             <img mat-card-image class="developerCover" [src]="Developer.imagem" alt="Photo of a {{Developer.nome}}">
@@ -7,14 +7,14 @@
         <mat-card class="mat-elevation-z3">
             <mat-card-header>
                 <img mat-card-avatar class="developerImage" [src]="Developer.imagem" alt= "Photo of a {{Developer.nome}}"> <!--onError="this.src='./../../../../assets/developer.png.png'"--> 
-                 <div class= "developerName">{{Developer.nome}}</div>
+                 <div class= "developerName">{{Developer.nacionalidade}}</div>
             </mat-card-header>
             </mat-card>
     </div>
     <div fxFlex="50%" fxFlex.gt-sm="75%">
         <mat-card class="mat-elevation-z0">
             <div class="row">
-                <span class="mat-display-1 ">{{Developer.nome}}</span>                
+                <span class="mat-display-1 uppercase-text">{{Developer.plataforma}}</span>                
             </div>
     </mat-card>
 </div>

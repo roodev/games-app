@@ -1,0 +1,26 @@
+<app-loading *ngIf="!Developers && !hasError"></app-loading>
+<app-error *nfIf="!Developers && hasError"></app-error>
+<div *ngIf="Developers && !hasError" class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <button mat-flat-button color="primary" (click)="openNewDeveloperModal()">Adicionar desenvolvedora</button>        
+    </div>
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor= "let developer of Developers">
+    <app-developer-card [Developer]="developer"></app-developer-card>   
+  </div>  
+</div>
+
+        
+            
+            
+
+
+            
+            
+            <!--</div>" class ="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+  <div fxFlex="100%" fxFlex.sm="100%" fxFlex.sm="100%">
+    <button mat-flat-button color="primary" (click)="openNewGameModal()">Adicionar Game</button>
+  </div>
+  <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor= "let game of Games">
+    <app-game-card [Game]="game"></app-game-card>   
+  </div>  
+</div>-->

@@ -24,7 +24,10 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/ngx-toastr/toastr.css",
               "src/styles.css"
+
             ],
             "scripts": []
           },
@@ -88,6 +91,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -123,6 +127,8 @@
   },
   "defaultProject": "games-app",
   "cli": {
-    "analytics": false
+
+    "analytics": "652f2a64-4206-4b16-86da-915e99b027d2"
+
   }
 }

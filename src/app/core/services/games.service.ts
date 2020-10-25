@@ -29,7 +29,10 @@ export class GamesService {
     let myParams = new HttpParams()
     myParams = myParams.append('nome', gameName)
     return this.http.get<any>(`${API_URL}/games/validarNomeGame`, {params: myParams}) 
+  }
 
+  updateGameById(gameId: String, body: Game): Observable<HttpResponse<Game>>{
+    return this.http.put<Game>(`${API_URL}/games/atualizar/${gameId}`, body, {observe: 'response'})
   }
 
 }

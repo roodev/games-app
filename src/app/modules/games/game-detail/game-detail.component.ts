@@ -3,6 +3,8 @@ import { ActivatedRoute} from "@angular/router"
 import { Subscription } from "rxjs"
 import { GamesService } from"./../../../core/services/games.service" 
 import { Game } from "./../../../core/models/game.model"
+import { MatDialog } from '@angular/material/dialog';
+import { UpdateGameComponent } from './../update-game/update-game.component'
 
 @Component({
   selector: 'app-game-detail',
@@ -14,15 +16,17 @@ export class GameDetailComponent implements OnInit, OnDestroy {
   private httpRequest: Subscription
   Game: Game
   hasError: boolean= false
+  gameName: String
 
   constructor(
     private ActivatedRoute: ActivatedRoute,
-    private gamesService: GamesService
+    private gamesService: GamesService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-    const gameName= this.ActivatedRoute.snapshot.params['gameName']
-    this.findGameByName(gameName)
+    this.gameName= this.ActivatedRoute.snapshot.params['gameName']
+    this.findGameByName(this.gameName)
   }
 
   ngOnDestroy(): void {
@@ -37,6 +41,24 @@ export class GameDetailComponent implements OnInit, OnDestroy {
       this.hasError= true
     })
   }
+
+  openUpdateGameModal(): void{
+    const dialogRef = this.dialog.open(UpdateGameComponent, {
+      disableClose: true,
+      width: '600px',
+      height: '600px',
+      data: this.Game
+    })
+
+    dialogRef.afterClosed().subscribe(updatedGame => {
+      if(updatedGame){
+        this.Game = undefined
+        this.findGameByName(this.gameName)
+      }
+    })
+
+  }
+  
 
 }
   

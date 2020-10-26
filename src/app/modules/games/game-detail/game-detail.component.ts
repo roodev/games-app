@@ -1,10 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute} from "@angular/router"
+import { ActivatedRoute, Router} from "@angular/router"
 import { Subscription } from "rxjs"
 import { GamesService } from"./../../../core/services/games.service" 
 import { Game } from "./../../../core/models/game.model"
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateGameComponent } from './../update-game/update-game.component'
+import { ConfirmComponent } from './../../../components/confirm/confirm.component'
+import { ToastrComponentlessModule } from 'ngx-toastr';
+import { MyToastrService } from 'src/app/core/services/toastr.service';
+
 
 @Component({
   selector: 'app-game-detail',
@@ -21,7 +25,9 @@ export class GameDetailComponent implements OnInit, OnDestroy {
   constructor(
     private ActivatedRoute: ActivatedRoute,
     private gamesService: GamesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toastr: MyToastrService,
+    private route: Router
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +63,32 @@ export class GameDetailComponent implements OnInit, OnDestroy {
       }
     })
 
+  }
+
+  openConfirmModal(): void {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      disableClose: true,
+      width: '600px',
+      height: '160px',
+      data: `Deseja apagar o game ${this.Game['nome']}? A ação é irreversível!`
+    })
+
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if(confirmed){
+        this.deleteGame(this.Game['_id'])
+
+      }
+    })
+  }
+
+  deleteGame(gameId: String): void {
+    this.httpRequest = this.gamesService.deleteGameById(gameId).subscribe(response => {
+      this.toastr.showToastrSuccess(`O game ${this.Game['nome']} foi apagado com sucesso`)
+      this.route.navigate(['/games'])      
+    }, err => {
+      this.toastr.showToastrError(`${err.status} - ${err.error['message']}`)
+
+    })
   }
   
 

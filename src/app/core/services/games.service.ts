@@ -35,4 +35,8 @@ export class GamesService {
     return this.http.put<Game>(`${API_URL}/games/atualizar/${gameId}`, body, {observe: 'response'})
   }
 
+  deleteGameById(gameId: String): Observable<HttpResponse<Game>> {
+    return this.http.delete<Game>(`${API_URL}/games/apagar/${gameId}`, {observe: 'response' })
+  }
+
 }
